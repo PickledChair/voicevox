@@ -281,9 +281,11 @@ jobs:
           mv voicevox_engine/* prepackage/
           rm -rf voicevox_engine
 
-      - name: Merge VOICEVOX ENGINE into prepackage/VOICEVOX.app/Contents/MacOS/
+      - name: Merge VOICEVOX ENGINE into prepackage/VOICEVOX.app/Contents/{MacOS/,Frameworks/}
         if: startsWith(matrix.artifact_name, 'macos-')
         run: |
+          mv voicevox_engine/engine_internal/* prepackage/VOICEVOX.app/Contents/Frameworks/
+          rm -rf voicevox_engine/engine_internal/
           mv voicevox_engine/* prepackage/VOICEVOX.app/Contents/MacOS/
           rm -rf voicevox_engine
 
